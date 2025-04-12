@@ -28,7 +28,6 @@
 			text-align: center;
 			white-space: nowrap;
 			width: 100vw;
-			font-size: 30vw;
 			line-height: 1;
 		}
 
@@ -55,6 +54,23 @@
 		}
 
 		const timeFormat = getQueryParam('timeFormat', 'HH:mm:ss');
+
+		function setTimeFontSize()
+		{
+			const baseCharCount = 5; // 'HH:mm' is 5 characters
+			const baseFontSize = 30; // vw for 5 chars
+			const formatLength = timeFormat.length;
+		
+			// Estimate visible characters by removing non-display characters
+			const displayCharCount = timeFormat.replace(/[^HhmsaA0-9]/g, '').length;
+		
+			const fontSizeVW = baseFontSize * (baseCharCount / displayCharCount);
+			timeEl.style.fontSize = `${fontSizeVW}vw`;
+		}
+		
+		setTimeFontSize();
+
+		
 		const dateFormat = getQueryParam('dateFormat', 'yyyy-MM-dd');
 
 		const timeEl = document.getElementById('time');

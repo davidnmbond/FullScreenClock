@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Clock</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/luxon@3/build/global/luxon.min.js"></script>
+	<style>
+		html, body
+		{
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background-color: #111;
+			color: white;
+			font-family: 'Roboto', sans-serif;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+		}
+
+		#time
+		{
+			font-weight: bold;
+			text-align: center;
+			white-space: nowrap;
+			width: 100vw;
+			font-size: 30vw;
+			line-height: 1;
+		}
+
+		#date
+		{
+			margin-top: 2vh;
+			font-size: 4vw;
+			text-align: center;
+			opacity: 0.7;
+		}
+	</style>
+</head>
+<body>
+	<div id="time">00:00</div>
+	<div id="date">2025-04-07</div>
+
+	<script>
+		const { DateTime } = luxon;
+
+		function getQueryParam(name, fallback)
+		{
+			const params = new URLSearchParams(window.location.search);
+			return params.get(name) || fallback;
+		}
+
+		const timeFormat = getQueryParam('timeFormat', 'HH:mm:ss');
+		const dateFormat = getQueryParam('dateFormat', 'yyyy-MM-dd');
+
+		const timeEl = document.getElementById('time');
+		const dateEl = document.getElementById('date');
+
+		function updateClock()
+		{
+			const now = DateTime.now();
+			timeEl.textContent = now.toFormat(timeFormat);
+			dateEl.textContent = now.toFormat(dateFormat);
+		}
+
+		updateClock();
+		setInterval(updateClock, 1000);
+	</script>
+</body>
+</html>

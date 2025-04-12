@@ -54,6 +54,10 @@
 		}
 
 		const timeFormat = getQueryParam('timeFormat', 'HH:mm:ss');
+		const dateFormat = getQueryParam('dateFormat', 'yyyy-MM-dd');
+
+		const timeEl = document.getElementById('time');
+		const dateEl = document.getElementById('date');
 
 		function setTimeFontSize()
 		{
@@ -69,12 +73,6 @@
 		}
 		
 		setTimeFontSize();
-
-		
-		const dateFormat = getQueryParam('dateFormat', 'yyyy-MM-dd');
-
-		const timeEl = document.getElementById('time');
-		const dateEl = document.getElementById('date');
 
 		function updateClock()
 		{

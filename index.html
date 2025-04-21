@@ -20,6 +20,9 @@
 			justify-content: center;
 			align-items: center;
 			overflow: hidden;
+			user-select: none;
+			pointer-events: none;
+			overflow: hidden;
 		}
 
 		#time
@@ -45,6 +48,15 @@
 	<div id="date">2025-04-07</div>
 
 	<script>
+		document.addEventListener("keydown", function(e) {
+			e.preventDefault();
+			return false;
+		});
+		document.addEventListener("contextmenu", function(e) {
+			e.preventDefault();
+			return false;
+		});
+
 		const { DateTime } = luxon;
 
 		function getQueryParam(name, fallback)
